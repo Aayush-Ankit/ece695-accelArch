@@ -1,0 +1,4 @@
+input path: inputs/8.txt
+input size: 8
+num iter: 10
+elapsed time in seconds: 3e-06
