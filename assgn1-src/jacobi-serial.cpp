@@ -9,7 +9,31 @@
 using namespace std;
 
 
-/************************* CPU Serial Implementation *************************/
+void print_1Darray (float *x, int N)
+{
+    for (int i=0; i<N; i++)
+        cout << x[i] << "  ";
+    cout << endl;
+}
+
+
+void mvm_check (float **A, float *x, float *b_exp, int input_size)
+{
+    float *b = (float*) malloc(input_size*sizeof(float));
+    for (int i=0; i<input_size; i++)
+    {
+        b[i] = 0;
+        for (int j=0; j<input_size; j++)
+            b[i] += A[i][j]*x[j];
+        if (abs(b[i]-b_exp[i]) > 1.0)
+        {
+            cout << "result not converged" << endl;
+            break;
+        }
+    }
+}
+
+
 double jacobi_iterative_cpu (float **A, float*x, float*b, int input_size, int num_iter)
 {
     clock_t begin = clock();
@@ -26,35 +50,14 @@ double jacobi_iterative_cpu (float **A, float*x, float*b, int input_size, int nu
                     sigma[i] += A[i][j]*x[j];
             }
         }
+        print_1Darray (sigma, input_size);
         for (int i=0; i<input_size; i++)
             x[i] = (b[i]-sigma[i])/A[i][i];
+        print_1Darray (x, input_size);
     }
     clock_t end = clock();
     double elapsed_secs = double(end-begin)/CLOCKS_PER_SEC;
     cout << "elapsed time in seconds: " << elapsed_secs << endl;
-}
-
-
-/************************* Testing Function *************************/
-void mvm_check (float **A, float *x, float *b_exp, int input_size)
-{
-    float *b = (float*) malloc(input_size*sizeof(float));
-    for (int i=0; i<input_size; i++)
-    {
-        b[i] = 0;
-        for (int j=0; j<input_size; j++)
-            b[i] += A[i][j]*x[j];
-        if (abs(b[i]-b_exp[i]) > 1.0)
-        {
-            cout << "result not converged" << endl;
-            break;
-        }
-    }
-    cout << "MVM check passed!" << endl;
-    // print the computed results
-    for (int i=0; i<input_size; i++)
-        cout << b[i] << "\t";
-    cout << endl;
 }
 
 
@@ -143,6 +146,7 @@ int main (int argc, char **argv){
     cout << endl;*/
 
     /************************* CPU run, check and time-log *************************/
+    //num_iter = 2;
     jacobi_iterative_cpu (A, x, b, input_size, num_iter);
     mvm_check (A, x, b, input_size);
 
