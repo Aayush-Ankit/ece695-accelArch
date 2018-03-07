@@ -9,14 +9,14 @@ void jacobi_sigma (float *A, float *b, float *x, float *sigma, int input_size)
   int i = blockIdx.x*blockDim.x + threadIdx.x;
   if (i < input_size)
   {
-    printf ("x_prev=%f\n", x[i]);
+    //printf ("x_prev=%f\n", x[i]);
     sigma[i] = 0;
     for (int j=0; j<input_size; j++)
     {
       if (i != j)
         sigma[i] += A[i*input_size+ j]*x[j];
     }
-    printf ("sigma_value=%f\n", sigma[i]);
+    //printf ("sigma_value=%f\n", sigma[i]);
   }
 }
 
@@ -27,7 +27,7 @@ void jacobi_xnext (float *A, float *b, float*x, float *sigma, int input_size)
   if (i < input_size)
   {
     x[i] = (b[i]-sigma[i])/A[i*input_size+ i];
-    //printf ("x_next=%f\n", x[i]);
+    //printf ("thid: %d x_next=%f\n", i, x[i]);
   }
 }
 
@@ -86,7 +86,6 @@ int main (int argc, char **argv){
     else  block_width = 1<<6; // defalut is 64
 
     cout << "block size: " << block_width << endl;
-    num_iter = 2;
     for (int k=0; k<num_iter; k++)
     {
       jacobi_sigma <<<(input_size+block_width-1)/block_width,block_width>>>
@@ -94,8 +93,7 @@ int main (int argc, char **argv){
 
       jacobi_xnext <<<(input_size+block_width-1)/block_width,block_width>>>
         (d_A, d_b, d_x, d_sigma, input_size);
-
-      cudaDeviceSynchronize(); // stops host execution until kernel finishes
+      //cudaDeviceSynchronize(); // stops host execution until kernel finishes
     }
 
     // move data from device to host memory

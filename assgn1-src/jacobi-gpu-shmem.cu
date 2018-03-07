@@ -13,26 +13,31 @@ void jacobi_sigma (float *A, float *b, float *x, float *sigma, int input_size)
   int i = blockIdx.x*blockDim.x + threadIdx.x;
   if (i < input_size)
   {
-    printf("sigma kernel starts...\n");
+    //printf("sigma kernel starts...\n");
     //printf ("x_prev=%f\n", x[i]);
     sigma[i] = 0;
-    for (int j=0; j<(input_size/TILE_DIM)+1; j++) //divides sigma[i] compute into (input_size/TILE_DIM) chunks for shmem
+    for (int j=0; j<((input_size-1)/TILE_DIM)+1; j++) //divides sigma[i] compute into (input_size/TILE_DIM) chunks for shmem
     {
       // read data from Gmem - a thread reads all values in a column
       // threads concurrently access the same row - coalesced access to Gmem
       for (int k=0; k<TILE_DIM; k++)
-        tile[i][k] = A[k*input_size + ((j*TILE_DIM) + i)]; // tile has A's part in tranposed form (to avoid shmem bank conflicts)
+        tile[threadIdx.x][k] = A[(blockIdx.x*blockDim.x + k)*input_size +
+          ((j*TILE_DIM) + threadIdx.x)]; // tile has A's part in tranposed form (to avoid shmem bank conflicts)
 
       __syncthreads(); //a thread within a block brings data for different threads
 
       for (int k=0; k<TILE_DIM; k++)
-        if (i != k)
-          sigma[i] += tile[k][i]*x[k];
+      {
+        if (i != (j*TILE_DIM + k))
+          sigma[i] += tile[k][threadIdx.x]*x[(j*TILE_DIM) + k];
+        //if (i==0)
+        //  printf("Aval: %f Xval: %f\n", tile[k][threadIdx.x]);
+      }
 
       __syncthreads(); //a thread can't fetch new data unless all previous data in shmem for the block gets used
     }
-    printf ("sigma_value=%f\n", sigma[i]);
-    printf("sigma kernel ends...\n");
+    //printf ("sigma_value=%f\n", sigma[i]);
+    //printf("sigma kernel ends...\n");
   }
 }
 
@@ -43,7 +48,7 @@ void jacobi_xnext (float *A, float *b, float*x, float *sigma, int input_size)
   if (i < input_size)
   {
     x[i] = (b[i]-sigma[i])/A[i*input_size+ i];
-    //printf ("x_next=%f\n", x[i]);
+    //printf ("thid: %d x_next=%f\n", i, x[i]);
   }
 }
 
@@ -105,14 +110,23 @@ int main (int argc, char **argv){
     //num_iter = 2;
     for (int k=0; k<num_iter; k++)
     {
-      cout << "Iteration: " << k << endl;
+      //cout << "Iteration: " << k << endl;
       jacobi_sigma <<<(input_size+block_width-1)/block_width,block_width>>>
         (d_A, d_b, d_x, d_sigma, input_size);
+
+      //cudaMemcpy(x, d_sigma, input_size*sizeof(float), cudaMemcpyDeviceToHost);
+      //cout << "Sigma at Iter " << k << endl;
+      //for (int j=0; j<input_size; j++)
+      //  cout << x[j] << endl;
 
       jacobi_xnext <<<(input_size+block_width-1)/block_width,block_width>>>
         (d_A, d_b, d_x, d_sigma, input_size);
 
-      cudaDeviceSynchronize(); // stops host execution until kernel finishes
+      //cudaMemcpy(x, d_x, input_size*sizeof(float), cudaMemcpyDeviceToHost);
+      //for (int j=0; j<input_size; j++)
+      //  cout << x[j] << endl;
+
+      //cudaDeviceSynchronize(); // stops host execution until kernel finishes
     }
 
     // move data from device to host memory
