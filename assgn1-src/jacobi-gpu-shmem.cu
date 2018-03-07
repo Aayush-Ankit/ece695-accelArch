@@ -3,20 +3,36 @@
 #include "mvm_check.h"
 #include "parser.h"
 
+const int TILE_DIM = 64; //blockDim.x = TILE_DIM must be
+
   __global__
 void jacobi_sigma (float *A, float *b, float *x, float *sigma, int input_size)
 {
+  __shared__ float tile[TILE_DIM][TILE_DIM];
+
   int i = blockIdx.x*blockDim.x + threadIdx.x;
   if (i < input_size)
   {
-    printf ("x_prev=%f\n", x[i]);
+    printf("sigma kernel starts...\n");
+    //printf ("x_prev=%f\n", x[i]);
     sigma[i] = 0;
-    for (int j=0; j<input_size; j++)
+    for (int j=0; j<(input_size/TILE_DIM)+1; j++) //divides sigma[i] compute into (input_size/TILE_DIM) chunks for shmem
     {
-      if (i != j)
-        sigma[i] += A[i*input_size+ j]*x[j];
+      // read data from Gmem - a thread reads all values in a column
+      // threads concurrently access the same row - coalesced access to Gmem
+      for (int k=0; k<TILE_DIM; k++)
+        tile[i][k] = A[k*input_size + ((j*TILE_DIM) + i)]; // tile has A's part in tranposed form (to avoid shmem bank conflicts)
+
+      __syncthreads(); //a thread within a block brings data for different threads
+
+      for (int k=0; k<TILE_DIM; k++)
+        if (i != k)
+          sigma[i] += tile[k][i]*x[k];
+
+      __syncthreads(); //a thread can't fetch new data unless all previous data in shmem for the block gets used
     }
     printf ("sigma_value=%f\n", sigma[i]);
+    printf("sigma kernel ends...\n");
   }
 }
 
@@ -86,9 +102,10 @@ int main (int argc, char **argv){
     else  block_width = 1<<6; // defalut is 64
 
     cout << "block size: " << block_width << endl;
-    num_iter = 2;
+    //num_iter = 2;
     for (int k=0; k<num_iter; k++)
     {
+      cout << "Iteration: " << k << endl;
       jacobi_sigma <<<(input_size+block_width-1)/block_width,block_width>>>
         (d_A, d_b, d_x, d_sigma, input_size);
 
