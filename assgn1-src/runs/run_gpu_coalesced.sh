@@ -1,3 +1,5 @@
+cd ..
+
 nvcc -o bin/jacobi-gpu1-coalesced jacobi-gpu-coalesced.cu
 
 # input 8.txt with varying block sizes

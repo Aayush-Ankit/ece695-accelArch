@@ -1,3 +1,5 @@
+cd ..
+
 nvcc -o bin/jacobi-gpu-unified jacobi-gpuUnified.cu
 
 # input 8.txt with varying block sizes

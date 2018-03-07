@@ -1,3 +1,5 @@
+cd..
+
 nvcc -o bin/jacobi-gpu1-2kernel jacobi-gpu.cu
 
 # input 8.txt with varying block sizes
