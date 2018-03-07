@@ -80,7 +80,7 @@ int main (int argc, char **argv){
         At[j*input_size+i] = A[i*input_size+j];
 
     // allocate device memory
-    cuProfilerStart();
+    //cuProfilerStart();
     float *d_A, *d_b, *d_x, *d_sigma;
     cudaMalloc((void**) &d_A, input_size*input_size*sizeof(float)); //cudaMalloc has to be 1d array
     cudaMalloc((void**) &d_b, input_size*sizeof(float));
@@ -113,7 +113,7 @@ int main (int argc, char **argv){
 
     // move data from device to host memory
     cudaMemcpy(x, d_x, input_size*sizeof(float), cudaMemcpyDeviceToHost);
-    cuProfilerStop();
+    //cuProfilerStop();
 
     // test results
     mvm_check (A, x, b, input_size);

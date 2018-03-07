@@ -1,20 +1,17 @@
-==7377== NVPROF is profiling process 7377, command: ./bin/jacobi-gpu-unified 8.txt 256
-==7377== Profiling application: ./bin/jacobi-gpu-unified 8.txt 256
-==7377== Profiling result:
-Time(%)      Time     Calls       Avg       Min       Max  Name
- 94.18%  181.19us        10  18.119us  2.9760us  153.80us  jacobi_sigma(float*, float*, float*, float*, int)
-  5.82%  11.200us        10  1.1200us  1.0240us  1.4720us  jacobi_xnext(float*, float*, float*, float*, int)
-
-==7377== API calls:
-Time(%)      Time     Calls       Avg       Min       Max  Name
- 97.11%  434.09ms         4  108.52ms  7.8920us  434.06ms  cudaMallocManaged
-  2.41%  10.780ms       360  29.943us     628ns  3.0496ms  cuDeviceGetAttribute
-  0.26%  1.1434ms         4  285.84us  269.31us  307.93us  cuDeviceTotalMem
-  0.12%  525.90us         4  131.48us  74.869us  185.29us  cuDeviceGetName
-  0.05%  226.36us        20  11.317us  7.2630us  45.955us  cudaLaunch
-  0.02%  84.298us         1  84.298us  84.298us  84.298us  cudaDeviceSynchronize
-  0.02%  78.710us       100     787ns     628ns  3.8410us  cudaSetupArgument
-  0.01%  51.544us         3  17.181us  11.385us  26.679us  cudaFree
-  0.00%  17.810us        20     890ns     768ns  2.1650us  cudaConfigureCall
-  0.00%  7.1940us         8     899ns     768ns  1.0480us  cuDeviceGet
-  0.00%  3.2830us         2  1.6410us     978ns  2.3050us  cuDeviceGetCount
+==156185== NVPROF is profiling process 156185, command: ./bin/jacobi-gpu-unified 8.txt 256
+==156185== Profiling application: ./bin/jacobi-gpu-unified 8.txt 256
+==156185== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   90.95%  150.15us        10  15.014us  2.9440us  123.58us  jacobi_sigma(float*, float*, float*, float*, int)
+                    9.05%  14.948us        10  1.4940us  1.4400us  1.8560us  jacobi_xnext(float*, float*, float*, float*, int)
+      API calls:   95.78%  114.44ms         4  28.611ms  12.152us  114.40ms  cudaMallocManaged
+                    2.36%  2.8228ms       376  7.5070us     934ns  258.48us  cuDeviceGetAttribute
+                    1.26%  1.5079ms         4  376.98us  376.27us  377.49us  cuDeviceTotalMem
+                    0.29%  342.98us        20  17.149us  11.664us  103.66us  cudaLaunch
+                    0.18%  217.00us         4  54.249us  52.406us  56.867us  cuDeviceGetName
+                    0.08%  97.752us         3  32.584us  23.158us  49.553us  cudaFree
+                    0.02%  24.002us       100     240ns     194ns  1.4350us  cudaSetupArgument
+                    0.01%  11.871us         1  11.871us  11.871us  11.871us  cudaDeviceSynchronize
+                    0.01%  9.0420us         8  1.1300us     977ns  1.4060us  cuDeviceGet
+                    0.01%  6.7340us        20     336ns     242ns  1.7350us  cudaConfigureCall
+                    0.00%  3.5940us         2  1.7970us  1.1450us  2.4490us  cuDeviceGetCount

@@ -75,7 +75,7 @@ int main (int argc, char **argv){
     cudaMalloc((void**) &d_x, input_size*sizeof(float));
     cudaMalloc((void**) &d_sigma, input_size*sizeof(float));
 
-    cuProfilerStart();
+    //cuProfilerStart();
     // move data from host to device memory
     cudaMemcpy(d_A, A, (input_size*input_size)*sizeof(float), cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, input_size*sizeof(float), cudaMemcpyHostToDevice);
@@ -98,7 +98,7 @@ int main (int argc, char **argv){
 
     // move data from device to host memory
     cudaMemcpy(x, d_x, input_size*sizeof(float), cudaMemcpyDeviceToHost);
-    cuProfilerStop();
+    //cuProfilerStop();
 
     // test results
     mvm_check (A, x, b, input_size);

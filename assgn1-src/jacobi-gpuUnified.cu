@@ -2,8 +2,6 @@
 #include <cassert>
 #include "mvm_check.h"
 #include "parser.h"
-#include <cuda.h>
-#include <cuda_runtime_api.h>
 
   __global__
 void jacobi_sigma (float *A, float *b, float *x, float *sigma, int input_size)
