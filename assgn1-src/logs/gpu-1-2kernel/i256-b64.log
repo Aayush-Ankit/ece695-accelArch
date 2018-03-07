@@ -1,22 +1,19 @@
-==21216== NVPROF is profiling process 21216, command: ./bin/jacobi-gpu1-2kernel 256.txt 64
-==21216== Profiling application: ./bin/jacobi-gpu1-2kernel 256.txt 64
-==21216== Profiling result:
-Time(%)      Time     Calls       Avg       Min       Max  Name
- 97.92%  102.17ms      1500  68.113us  67.587us  69.603us  jacobi_sigma(float*, float*, float*, float*, int)
-  2.05%  2.1408ms      1500  1.4270us  1.4080us  2.0170us  jacobi_xnext(float*, float*, float*, float*, int)
-  0.02%  26.051us         3  8.6830us  1.0250us  23.970us  [CUDA memcpy HtoD]
-  0.00%  1.2480us         1  1.2480us  1.2480us  1.2480us  [CUDA memcpy DtoH]
-
-==21216== API calls:
-Time(%)      Time     Calls       Avg       Min       Max  Name
- 69.45%  218.77ms         4  54.692ms  5.1690us  218.51ms  cudaMalloc
- 12.93%  40.742ms      3000  13.580us  4.1910us  449.78us  cudaLaunch
- 11.54%  36.360ms         4  9.0900ms  9.2190us  36.262ms  cudaMemcpy
-  3.67%  11.559ms     15000     770ns     628ns  21.231us  cudaSetupArgument
-  1.14%  3.5756ms       364  9.8230us     559ns  452.99us  cuDeviceGetAttribute
-  0.80%  2.5112ms      3000     837ns     628ns  3.5620us  cudaConfigureCall
-  0.26%  833.00us         4  208.25us  198.63us  221.89us  cuDeviceTotalMem
-  0.10%  317.08us         4  79.270us  61.181us  107.35us  cuDeviceGetName
-  0.10%  305.77us         3  101.92us  4.3300us  289.98us  cudaFree
-  0.00%  9.3570us        12     779ns     629ns     977ns  cuDeviceGet
-  0.00%  3.4900us         3  1.1630us     768ns  1.8150us  cuDeviceGetCount
+==2852== NVPROF is profiling process 2852, command: ./bin/jacobi-gpu1-2kernel 256.txt 64
+==2852== Profiling application: ./bin/jacobi-gpu1-2kernel 256.txt 64
+==2852== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   98.01%  104.81ms      1500  69.872us  37.730us  2.3060ms  jacobi_sigma(float*, float*, float*, float*, int)
+                    1.98%  2.1121ms      1500  1.4080us  1.3760us  2.4320us  jacobi_xnext(float*, float*, float*, float*, int)
+                    0.01%  12.290us         3  4.0960us     832ns  10.625us  [CUDA memcpy HtoD]
+                    0.00%     672ns         1     672ns     672ns     672ns  [CUDA memcpy DtoH]
+      API calls:   68.22%  279.99ms         4  69.998ms  7.5900us  279.76ms  cudaMalloc
+                   17.98%  73.800ms      3000  24.600us  11.293us  2.2744ms  cudaLaunch
+                   11.53%  47.319ms         4  11.830ms  19.350us  43.375ms  cudaMemcpy
+                    0.89%  3.6325ms     15000     242ns     184ns  383.72us  cudaSetupArgument
+                    0.69%  2.8224ms       376  7.5060us     926ns  275.80us  cuDeviceGetAttribute
+                    0.37%  1.5024ms         4  375.60us  370.86us  377.80us  cuDeviceTotalMem
+                    0.21%  844.84us      3000     281ns     252ns  2.1970us  cudaConfigureCall
+                    0.07%  298.76us         3  99.586us  10.920us  273.81us  cudaFree
+                    0.05%  214.82us         4  53.704us  52.520us  54.844us  cuDeviceGetName
+                    0.00%  8.6710us         8  1.0830us     998ns  1.1600us  cuDeviceGet
+                    0.00%  4.4780us         3  1.4920us  1.1310us  2.1950us  cuDeviceGetCount
