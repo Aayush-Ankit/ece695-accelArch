@@ -1,0 +1,19 @@
+==2909== NVPROF is profiling process 2909, command: ./bin/jacobi-gpu1-2kernel 1024.txt 64
+==2909== Profiling application: ./bin/jacobi-gpu1-2kernel 1024.txt 64
+==2909== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   99.58%  4.89472s     10000  489.47us  184.71us  2.5788ms  jacobi_sigma(float*, float*, float*, float*, int)
+                    0.39%  19.146ms     10000  1.9140us  1.8240us  2.5280us  jacobi_xnext(float*, float*, float*, float*, int)
+                    0.03%  1.4028ms         3  467.61us  1.0880us  1.4006ms  [CUDA memcpy HtoD]
+                    0.00%     672ns         1     672ns     672ns     672ns  [CUDA memcpy DtoH]
+      API calls:   89.06%  4.71452s     20000  235.73us  11.260us  2.6227ms  cudaLaunch
+                    5.33%  281.99ms         4  70.497ms  8.1860us  281.75ms  cudaMalloc
+                    4.98%  263.75ms         4  65.936ms  37.964us  259.82ms  cudaMemcpy
+                    0.43%  22.784ms    100000     227ns     185ns  381.94us  cudaSetupArgument
+                    0.11%  5.9051ms     20000     295ns     232ns  375.39us  cudaConfigureCall
+                    0.05%  2.8124ms       376  7.4790us     948ns  264.93us  cuDeviceGetAttribute
+                    0.03%  1.5055ms         4  376.38us  371.16us  380.04us  cuDeviceTotalMem
+                    0.01%  433.25us         3  144.42us  11.195us  404.68us  cudaFree
+                    0.00%  214.01us         4  53.503us  53.109us  53.920us  cuDeviceGetName
+                    0.00%  8.9820us         8  1.1220us  1.0430us  1.2070us  cuDeviceGet
+                    0.00%  4.3400us         3  1.4460us  1.1350us  1.9940us  cuDeviceGetCount

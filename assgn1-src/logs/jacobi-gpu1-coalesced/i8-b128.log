@@ -1,0 +1,19 @@
+==160545== NVPROF is profiling process 160545, command: ./bin/jacobi-gpu1-coalesced 8.txt 128
+==160545== Profiling application: ./bin/jacobi-gpu1-coalesced 8.txt 128
+==160545== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   64.64%  33.766us        10  3.3760us  3.2650us  4.1610us  jacobi_sigma(float*, float*, float*, float*, int)
+                   28.86%  15.077us        10  1.5070us  1.4400us  1.8890us  jacobi_xnext(float*, float*, float*, float*, int)
+                    5.15%  2.6900us         3     896ns     768ns  1.1530us  [CUDA memcpy HtoD]
+                    1.35%     705ns         1     705ns     705ns     705ns  [CUDA memcpy DtoH]
+      API calls:   93.91%  151.42ms         4  37.854ms  13.277us  151.37ms  cudaMalloc
+                    3.30%  5.3132ms       376  14.130us  1.1080us  512.33us  cuDeviceGetAttribute
+                    1.95%  3.1474ms         4  786.85us  681.42us  833.79us  cuDeviceTotalMem
+                    0.38%  611.95us        20  30.597us  22.321us  60.917us  cudaLaunch
+                    0.26%  425.60us         4  106.40us  99.106us  110.32us  cuDeviceGetName
+                    0.07%  113.99us         4  28.497us  12.403us  42.936us  cudaMemcpy
+                    0.06%  92.452us         3  30.817us  27.409us  36.199us  cudaFree
+                    0.04%  71.226us       100     712ns     209ns  3.6230us  cudaSetupArgument
+                    0.02%  25.513us         8  3.1890us  1.1930us  3.7870us  cuDeviceGet
+                    0.01%  15.736us        20     786ns     316ns  1.8090us  cudaConfigureCall
+                    0.00%  7.7510us         3  2.5830us  1.1990us  3.8510us  cuDeviceGetCount

@@ -1,0 +1,17 @@
+==156735== NVPROF is profiling process 156735, command: ./bin/jacobi-gpu-unified 5120.txt 512
+==156735== Profiling application: ./bin/jacobi-gpu-unified 5120.txt 512
+==156735== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   99.91%  577.743s    150000  3.8516ms  3.7838ms  10.324ms  jacobi_sigma(float*, float*, float*, float*, int)
+                    0.09%  494.94ms    150000  3.2990us  2.8480us  3.8720us  jacobi_xnext(float*, float*, float*, float*, int)
+      API calls:   99.56%  575.291s    300000  1.9176ms  11.613us  4.2590ms  cudaLaunch
+                    0.34%  1.97021s         1  1.97021s  1.97021s  1.97021s  cudaDeviceSynchronize
+                    0.06%  338.29ms   1500000     225ns     187ns  388.63us  cudaSetupArgument
+                    0.02%  136.45ms         4  34.112ms  9.2910us  136.39ms  cudaMallocManaged
+                    0.02%  90.889ms    300000     302ns     230ns  553.01us  cudaConfigureCall
+                    0.00%  2.8665ms         3  955.51us  22.962us  2.8157ms  cudaFree
+                    0.00%  2.7974ms       376  7.4390us     930ns  259.16us  cuDeviceGetAttribute
+                    0.00%  1.5115ms         4  377.88us  376.26us  378.85us  cuDeviceTotalMem
+                    0.00%  216.58us         4  54.145us  52.508us  55.952us  cuDeviceGetName
+                    0.00%  8.9690us         8  1.1210us  1.0060us  1.3340us  cuDeviceGet
+                    0.00%  3.0620us         2  1.5310us  1.1990us  1.8630us  cuDeviceGetCount

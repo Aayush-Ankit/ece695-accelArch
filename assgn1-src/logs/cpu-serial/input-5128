@@ -1,0 +1,4 @@
+input path: inputs/5120.txt
+input size: 5120
+num iter: 150000
+elapsed time in seconds: 10666.8

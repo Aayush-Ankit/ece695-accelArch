@@ -1,3 +1,4 @@
+cd ..
 g++ jacobi-serial.cpp -o bin/serial
 ./bin/serial 8.txt > logs/input-8
 ./bin/serial 256.txt > logs/input-256
