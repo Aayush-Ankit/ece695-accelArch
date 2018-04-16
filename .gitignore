@@ -35,3 +35,10 @@ cuobjdump_to_ptxplus/sass_parser.hh
 cuobjdump_to_ptxplus/sass_parser.output
 
 build/*
+
+gpgpu-sim/
+
+ispass2009-benchmarks/
+gpgpu-sim-distribution/
+nvidia/
+common

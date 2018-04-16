@@ -1,0 +1,48 @@
+
+	.version 1.4
+.target sm_10, map_f64_to_f32
+
+	
+
+
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+
+.file	1	"<command-line>"
+.file	2	"/tmp/tmpxft_00005cc8_00000000-8_wsm5.f.compute_10.cudafe2.gpu"
+.file	3	"/usr/lib/gcc/x86_64-redhat-linux/4.4.7/include/stddef.h"
+.file	4	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/crt/device_runtime.h"
+.file	5	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/host_defines.h"
+.file	6	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/builtin_types.h"
+.file	7	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/device_types.h"
+.file	8	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/driver_types.h"
+.file	9	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/surface_types.h"
+.file	10	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/texture_types.h"
+.file	11	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/vector_types.h"
+.file	12	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/device_launch_parameters.h"
+.file	13	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/crt/storage_class.h"
+.file	14	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/common_functions.h"
+.file	15	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/math_functions.h"
+.file	16	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/math_constants.h"
+.file	17	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/device_functions.h"
+.file	18	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/sm_11_atomic_functions.h"
+.file	19	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/sm_12_atomic_functions.h"
+.file	20	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/sm_13_double_functions.h"
+.file	21	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/sm_20_atomic_functions.h"
+.file	22	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/sm_20_intrinsics.h"
+.file	23	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/sm_30_intrinsics.h"
+.file	24	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/surface_functions.h"
+.file	25	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/texture_fetch_functions.h"
+.file	26	"/home/dynamo/a/tgrogers/ece695-accel/4.2/cuda/bin/../include/math_functions_dbl_ptx1.h"
+
+
+
