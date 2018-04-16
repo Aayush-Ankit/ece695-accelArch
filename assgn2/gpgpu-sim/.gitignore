@@ -1,11 +1,3 @@
-bin/
-*sw*
-*pdf
-assgn1-src/bin/
-assgn1-src/inputs/
-others/
-*tgz*
-
 src/intersim2/lex.yy.c
 src/intersim2/y.tab.c
 src/intersim2/y.tab.h
@@ -35,9 +27,3 @@ cuobjdump_to_ptxplus/sass_parser.hh
 cuobjdump_to_ptxplus/sass_parser.output
 
 build/*
-
-
-ispass2009-benchmarks/
-gpgpu-sim-distribution/
-nvidia/
-common
